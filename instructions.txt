@@ -1,0 +1,64 @@
+* Nimi: Petra Paloniemi
+* E-Mail: petra.paloniemi@tuni.fi
+
+Muistipeli
+
+Kuvaus:
+Ohjelma toteuttaa muistipelin, jonka alussa käyttäjä valitsee valmiista
+vaihtoehdoista korttien ja pelaajien määrän, ja halutessaan
+antaa pelaajille myös omavalintaiset nimet. Nimien tulee kuitenkin koostua
+vain a-z/A-Z merkeistä, ensimmäinen merkki ei saa olla välilyönti ja nimet
+erotellaan toisistaan välilyönneillä. Jos nimiä ei anneta tai käyttäjän
+syöte ei täyttänyt vaatimuksia, käytetään ohjelman valmiiksi luomia nimiä
+Player1-Player4 (riippuen pelaajien määrästä).
+Peli käynnistyy kun käyttäjä painaa Play-painiketta, ja edellä mainitut
+kohdat muuttuvat epäaktiivisiksi, jolloin niitä ei voi enää muokata.
+
+Joka kierroksella vuorossa oleva pelaaja klikkaa kahta haluamaansa korttia
+pelilaudalla. Kun kaksi korttia on käännettynä, peli jatkuu
+vasta Continue-painikkeesta painamalla. Jos kortit ovat parit, eli niissä
+on sama kirjain, ne jäävät näkyviin epäaktiivisina ja pelaajan pistemäärä
+(kerätyt parit) kasvaa, ja hän saa heti uuden vuoron. Jos kortit eivät olleet
+pari, ne kääntyvät takaisin ja vuoro siirtyy seuraavalle. Jokaisen löydetyn
+parin jälkeen tilanne päivittyy tulostaululle, jossa näkyy pelaajien nimet
+ja näiden keräämien parien lukumäärä.
+
+Peli päättyy, kun kaikki parit on löydetty. Peli voi päättyä tasatilanteeseen,
+tai yhden pelaajan voittoon. Voittajan nimi ja tämän kerättyjen parien määrä
+ilmoitetaan vain yhden voittajan tilanteessa, tasapelissä näytetään vain
+voittajien lukumäärä, mutta pelaajien keräämät parit näkyvät edelleen normaalisti
+tulostaulussa.
+
+
+Rakenne:
+Valtaosa pelin widgeteistä on tehty Qt Designerilla. Ikkunan vasemmassa
+yläkulmassa on startGridLayout, jossa on kaksi pudotusvalikkoa (cardComboBox
+ja playerComboBox), joista valitaan korttien ja pelaajien määrä. Kortteja on
+tasaluku ja 8-20 kappaletta käyttäjän valinnasta riippuen. Pelaajia voi olla
+2-4. Näiden alapuolella olevaan kenttään (playerNameLineEdit) käyttäjä
+voi vapaaehtoisesti kirjoittaa pelaajien nimiä. Layoutin alapuolella
+on Play-painike (playPushButton), josta klikkaamalla peli käynnistyy,
+jolloin ohjelma tallentaa edellä kuvatut tiedot muodostaen pelaajat
+ja kortit, ja jakaa sekoitetut kortit "pelilaudalle" (cardGridLayout) niin,
+että sarakkeiden ja rivien määrät ovat mahdollisimman lähellä toisiaan.
+Yllä kuvatut widgetit epäaktivoituvat, eli pelaaja ei voi enää
+muokata niitä.
+
+Käyttäjän klikatessa korttia, joka on push button, kortti "kääntyy", jolloin
+sen väri vaihtuu sinisestä valkoiseksi ja sille varattu kirjain näytetään.
+Kortti myös epäaktivoituu. Kun toinen kortti on käännetty samoin, muiden
+korttien kääntäminen ei enää onnistu. Aikaisemmin epäaktiivisena ollut
+Continue-painike (continuePushButton) muuttuu aktiiviseksi, ja vain siitä
+painettaessa peli voi jatkua ja korttien kääntäminen on taas
+mahdollista, jolloin painike taas epäaktivoituu hetkeksi. Pelitilanne näkyy
+ikkunan oikeassa yläkulmassa statsTextBrowser "tulostaululla". Myös
+voittaja tai mahdollinen tasapeli näkyy tällä tulostaululla pelin lopuksi.
+
+Ikkuna suljetaan Close-painikkeesta (closePushButton).
+
+
+Toteutetut lisäominaisuudet:
+
+1: Vaihteleva määrä pelaajia (2-4) ja pelaaja voi itse valita näistä.
+2: Käyttäjä voi antaa nimet pelaajille (jos ei anna, käytetään valmiita nimiä).
+3: Näytetään tulostaululla mitkä parit kukin pelaaja on saanut, eli parien kirjaimet.
